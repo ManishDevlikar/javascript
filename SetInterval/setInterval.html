@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>0</h1>
+    <button id="stop" class="stop">stop</button>
+    <button id="start" class="start">start</button>
+    <script>
+      let randomColor = function () {
+        let hex = "0123456789abcdef";
+        let color = "#";
+
+        for (i = 1; i <= 6; i++) {
+          color += hex[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      };
+
+      let interval;
+      let started = false;
+
+      let startCounter = function () {
+        if (!started) {
+          let i = 0;
+          interval = setInterval(count, 1000);
+
+          function count() {
+            i++;
+            document.querySelector("h1").innerHTML = i;
+            document.querySelector(
+              "body"
+            ).style.backgroundColor = `${randomColor()}`;
+          }
+          started = true;
+        }
+      };
+
+      let stopCounter = function () {
+        clearInterval(interval);
+        interval = null;
+        started = false;
+      };
+
+      document.querySelector(".stop").addEventListener("click", stopCounter);
+
+      document.querySelector(".start").addEventListener("click", startCounter);
+    </script>
+  </body>
+</html>
